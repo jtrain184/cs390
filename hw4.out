@@ -1,0 +1,25 @@
+Test1
+-------------------------------------------------------------
+Student Name        Average        Letter Grade
+-------------------------------------------------------------
+John		93.4		A-
+Jones		86.3		B
+Xiang		78.6		C+
+Bob		90.3		A-
+Frank		84.1		B
+Total number of students in class:  5
+Class average of quiz:  82
+Class average of homework:  91.8
+Class average of exam:  82.4
+Class average of final exam:  83.8
+Class average grade: 86.54 (B)
+Test2-Error Handling
+-------------------------------------------------------------
+Student Name        Average        Letter Grade
+-------------------------------------------------------------
+John:****Invalid grade: 193
+Jones:****Wrong type: t
+Xiang:****Missing score for: H
+Bob		90.3		A-
+Frank		84.1		B
+Class averages not calculated due to errors.
