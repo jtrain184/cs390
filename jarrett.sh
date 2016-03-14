@@ -1,6 +1,7 @@
 #! /bin/bash
-#CS390 HW5 - Grade Report
+#CS390 HW5 - jarrett.sh
 #A bash shell script that creates a report (using awk) of class grade
+# Phil Jarrett, Spring 2016
 
 
 #checkLimits() - makes sure grade range is correct
@@ -11,10 +12,13 @@ function checkLimits() {
 	fi
 }
 
-#studentGrade() - handles entering of student grades, each grade entered
-# into associative array based on name
+#studentGrade() - handles entering of student grades, with user menu
 function studentGrade() {
-echo "Select option to enter (1-5): "
+	gradeQ=0
+	gradeH=0
+	gradeM=0
+	gradeF=0
+echo "Select grade to enter (1-5): "
 options="Quiz Homework Test Final Quit"
 select type in $options; do
 case $type in
@@ -37,6 +41,8 @@ case $type in
 		;;
 	"Quit")
 		echo -e $1	"\t"	$gradeQ	"\t"	$gradeH	"\t"	$gradeM	"\t"	$gradeF 
+		line="$gradeQ $gradeH $gradeM $gradeF"
+		echo $line
 		break
 		;;
 	*) echo "Wrong grade type!"
