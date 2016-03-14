@@ -40,15 +40,25 @@ case $type in
 		checkLimits gradeF
 		;;
 	"Quit")
-		echo -e $1	"\t"	$gradeQ	"\t"	$gradeH	"\t"	$gradeM	"\t"	$gradeF 
+		 
 		line="$gradeQ $gradeH $gradeM $gradeF"
-		echo $line
+		grade=`echo $line |awk -f grade.awk`
+		score=`echo $grade |awk '{print $5}'`
+		letter=`echo $grade |awk '{print $6}'`
+		echo -e "Score for " $1	"is: " $score  $letter
 		break
 		;;
 	*) echo "Wrong grade type!"
 		;;
 esac
 done
+}
+
+function createReport(){
+header="\n %-10s %8s %10s %11s\n"
+printf "$header" "ITEM NAME" "ITEM ID" "COLOR" "PRICE" >> $1
+
+
 }
 
 #Check for correct arguments
@@ -69,11 +79,13 @@ if [ ! -f $awk_file ]; then
 fi
 
 #Check to see if report file already exists, disply if it does
+# or create if it does not exist
 if [ -f $report_file ]; then
 	echo "Current report output: "
 	cat $report_file
+else 
+	createReport $report_file
 fi
-
 #User input loop
 answer="yes"
 while [ "$answer" == "yes" ]
