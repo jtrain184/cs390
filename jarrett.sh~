@@ -51,8 +51,8 @@ case $type in
 		echo -e "Score for " $1	"is: " $score  $letter
 
 		#Add grade to report
-		format="%-8s %8d %8d %8d %8d %8d %8s\n"
-		printf "$format" $1 $gradeQ $gradeH $gradeM $gradeF $score $letter  >> test.out
+		format="%-8s %8d %8d %8d %8d %8.1f %8s\n"
+		printf "$format" $1 $gradeQ $gradeH $gradeM $gradeF $score $letter  >> $report_file
 		break
 		;;
 	*) echo "Wrong grade type!"
@@ -100,6 +100,7 @@ fi
 
 #User input loop
 answer="yes"
+answer_modify="no"
 while [ "$answer" == "yes" ]
 do
 	echo -n "Build grade record for student (yes or no):"
@@ -108,6 +109,17 @@ do
 	if [ "$answer" == "yes" ] ; then
 		echo "Please enter student name: "	
 		read name
+		#Check to see if name exists
+		if
+		    grep -q $name "$report_file"; then
+		    echo $name " found, would you like to delete and re-enter record?"
+		    read answer_modify
+			if [ "$answer_modify" == "yes" ]; then
+			    sed -i "/$name/d" $report_file
+			else
+			    continue
+			fi
+		fi
 
 		echo "you entered: " $name
 		studentGrade $name
