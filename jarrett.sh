@@ -6,8 +6,12 @@
 
 #checkLimits() - makes sure grade range is correct
 function checkLimits() {
+	user_input=$1
+	if echo $user_input | grep '[^0-9]' >/dev/null; then
+    echo 'Invalid input'
+	fi
 	if [[ $1 -gt 100 || $1 -lt 0 ]]
-	then echo "Please enter a valid number" 
+	then echo "Please enter a valid number 0-100" 
 	continue
 	fi
 }
@@ -24,20 +28,19 @@ select type in $options; do
 case $type in
 	Quiz) echo -n "Please enter quiz grade: "
 		read gradeQ
-		checkLimits gradeQ
+		checkLimits $gradeQ
 		;;
 	Homework) echo -n "Please enter HW grade: "
 		read gradeH
-		checkLimits gradeH
-		HW[$1]=$gradeH
+		checkLimits $gradeH
 		;;
 	Test) echo -n "Please enter test grade: "
 		read gradeM
-		checkLimits gradeM
+		checkLimits $gradeM
 		;;
 	Final) echo -n "Please enter final grade: "
 		read gradeF
-		checkLimits gradeF
+		checkLimits $gradeF
 		;;
 	"Quit")
 		 
@@ -46,6 +49,10 @@ case $type in
 		score=`echo $grade |awk '{print $5}'`
 		letter=`echo $grade |awk '{print $6}'`
 		echo -e "Score for " $1	"is: " $score  $letter
+
+		#Add grade to report
+		format="%-8s %8d %8d %8d %8d %8d %8s\n"
+		printf "$format" $1 $gradeQ $gradeH $gradeM $gradeF $score $letter  >> test.out
 		break
 		;;
 	*) echo "Wrong grade type!"
@@ -54,14 +61,15 @@ esac
 done
 }
 
+#createReport() - generates output file for grade data
 function createReport(){
 header="\n %-8s %8s %8s %8s %8s %8s %8s\n"
 printf "$header" "Name" "Quiz" "Homework" "Midterm" "FinalExam" "Score" "Grade" >> $1
 
-format=" %-8s %8d %8d %8d %8d %8d %8d\n"
+
 
 #DEBUG- Report
-#printf "$format" "James" 82 94 95.2 >> $1		
+#printf "$format" "James" 90 100 74 75 84 B >> $1		
 }
 
 #Check for correct arguments
@@ -89,6 +97,7 @@ if [ -f $report_file ]; then
 else 
 	createReport $report_file
 fi
+
 #User input loop
 answer="yes"
 while [ "$answer" == "yes" ]
@@ -99,15 +108,12 @@ do
 	if [ "$answer" == "yes" ] ; then
 		echo "Please enter student name: "	
 		read name
+
 		echo "you entered: " $name
 		studentGrade $name
 
 	else
 		echo You have finished entering student records... Printing report...
 		cat $report_file
-	for name in $HW
-	do 
-		echo $name  ${HW[$name]}
-	done
 	fi
 done
