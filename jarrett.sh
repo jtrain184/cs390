@@ -55,10 +55,13 @@ done
 }
 
 function createReport(){
-header="\n %-10s %8s %10s %11s\n"
-printf "$header" "ITEM NAME" "ITEM ID" "COLOR" "PRICE" >> $1
+header="\n %-8s %8s %8s %8s %8s %8s %8s\n"
+printf "$header" "Name" "Quiz" "Homework" "Midterm" "FinalExam" "Score" "Grade" >> $1
 
+format=" %-8s %8d %8d %8d %8d %8d %8d\n"
 
+#DEBUG- Report
+#printf "$format" "James" 82 94 95.2 >> $1		
 }
 
 #Check for correct arguments
