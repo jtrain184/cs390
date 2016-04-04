@@ -1,0 +1,32 @@
+PA, Blenheim, Steve
+CA, Boop, Betty
+NJ, Chevsky, Igor
+MI, Corder, Norma
+TX, Cowan, Jennifer
+CA, DeLoach, Jon
+NB, Evich, Karen
+NB, Evich, Karen
+NB, Evich, Karen
+MN, Fardbarkle, Fred
+MN, Fardbarkle, Fred
+MA, Gortz, Lori
+IL, Gutierrez, Paco
+IL, Hardy, Ephram
+NJ, Ikeda, James
+IN, Kertz, Barbara
+MA, Kirstin, Lesley
+PA, Kopf, William
+WY, Lancelot, Sir
+CA, Neal, Jesse
+IL, Pinhead, Zippy
+DL, Putie, Arthur
+US, Sailor, Popeye
+TX, Santiago, Jose
+CA, Savage, Tommy
+NC, Takeshida, Yukio
+VM, Tranh, Vinh
+, , 
+, , 
+, , 
+, , 
+, , 
