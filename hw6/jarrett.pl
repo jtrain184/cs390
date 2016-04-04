@@ -8,7 +8,7 @@ use Data::Dumper;
 
 my @items;
 my $info = {};
-my($first,$last,$state);
+my($first,$last,$state,$date);
 
 
 if($#ARGV+1 == 0)
@@ -48,6 +48,7 @@ while (<>) {
     for (@phone){
     	my @name_DOB = "$last\t$first\t@date\n";
     	my @name_state = "$state, $last, $first\n";
+    	if ( $state =~ /IL/) {print "$first, $last is from Illinois.\n"}
     	my @sorted_name_state = sort { $a cmp $b} @name_state;
     	print OUT @sorted_name_state;
     	print OUT2 @name_DOB;
@@ -55,10 +56,16 @@ while (<>) {
   
     #print out names and salary
     for (@phone){
-    	my @name_salary = "$last\t$first\t@salary\n";
+    	my @name_salary = "$last\t$first\t\$@salary\n";
+    	if ( @salary > 40000) {print "$last, $first\t@salary\n"}
     	print OUT3 @name_salary;
     }
+
    
+    	if (@date =~ /\/6[0-9]/){
+    	print "$last, $first, $date was born in the 1960s\n";
+    	}
+
 }
 
 
